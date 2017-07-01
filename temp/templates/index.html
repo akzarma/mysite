@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ forms.name.label_tag }}
+    {{ forms.name }}
+    <br>
+    {{ forms.email.label_tag }}
+    {{ forms.email}}
+    <br>
+    {{ forms.DOB.label_tag }}
+    {{ forms.DOB}}
+    <br>
+    {{ forms.mobile.label_tag }}
+    {{ forms.mobile}}
+    <br>
+    {{ forms.marks.errors }}
+    {{ forms.marks.label_tag }}
+    {{ forms.marks }}
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+
+</body>
+</html>
