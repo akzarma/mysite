@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('temp', '0002_student_email'),
     ]
@@ -15,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='student',
             name='marks',
-            field=models.FileField(default=0, upload_to='temp/media/documents/<django.db.models.fields.CharField><built-in function id>'),
+            field=models.FileField(default=0,
+                                   upload_to='temp/media/documents/<django.db.models.fields.CharField><built-in function id>'),
             preserve_default=False,
         ),
         migrations.AlterField(
