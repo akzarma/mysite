@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data" id="student_form">
     {% csrf_token %}
     {{ forms.name.label_tag }}
     {{ forms.name }}
@@ -20,10 +20,26 @@
     {{ forms.marks.label_tag }}
     {{ forms.marks }}
     <br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="submit">
 </form>
 
 <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 
 </body>
+<script>
+    function fileSizeValidate() {
+        //alert("here");
+        var element = document.getElementById("id_marks");
+        var size = element.files[0].size;
+        var max_size = 1024*1024;
+        //alert(element.files[0].size);
+        if(size>max_size)
+            alert("File too big!");
+        else {
+            var form = document.getElementById('student_form');
+            form.submit();
+        }
+{#        1996-02-11#}
+    }
+</script>
 </html>
