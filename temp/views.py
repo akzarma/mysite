@@ -14,31 +14,25 @@ from .forms import StudentForm
 def home(request):
     # s = Student(name="Dweep",marks=1)
     # s.save()
+    #saves student details
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            name = form.data['name']
-            DOB = form.data['DOB']
-            email = form.data['email']
-            mobile = form.data['mobile']
-            marks = request.FILES['marks']
-            if marks.size > 5 * 1024 * 1024:
-                return HttpResponse("File size too big" + str(marks.size))
-            # marks
-            new_student = Student(name=name, DOB=DOB, email=email, mobile=mobile, marks=marks)
-            new_student.save()
+            form.save()
             print("save")
             return HttpResponseRedirect('/test/')
         else:
             print("else")
             return HttpResponse(form.errors.as_data())
     else:
-        form = StudentForm()
-
-    return render(request, 'index.html',
-                  {
-                      'forms': form
-                  })
+        form = StudentForm(initial={'gr_number':'555','handicapped':False})
+        # print(form)
+        print("3")
+        return render(request, 'index.html',
+                      {
+                          'form': form,
+                          'test':5
+                      })
 
 
 def action(request):
