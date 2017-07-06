@@ -4,18 +4,16 @@ from .models import Student
 
 
 class StudentForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(StudentForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs.update({
-            'class':'col-md-2'
-        })
         # for field in iter(self.fields):
         #     self.fields[field].widget.attrs.update({
         #         'class': 'form-control'
         #     })
+
     class Meta:
         model = Student
-
+        widgets = {
+            'DOB': forms.DateInput(attrs={'class': 'datepicker'}),
+        }
         fields = ['first_name',
                   'middle_name',
                   'last_name',
@@ -70,4 +68,5 @@ class StudentForm(forms.ModelForm):
                   'doc_tenth_marksheet',
                   'doc_twelfth_marksheet',
                   'doc_jee_marksheet',
+                  'doc_profile_pic'
                   ]
