@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            VIIT
+        {% endblock %}
+        {% load staticfiles %}
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'mysite/style.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script>
+        function fileSizeValidate() {
+            //alert("here");
+            var element = document.getElementById("id_marks");
+            var size = element.files[0].size;
+            var max_size = 1024 * 1024;
+            //alert(element.files[0].size);
+            if (size > max_size)
+                alert("File too big!");
+            else {
+                var form = document.getElementById('student_form');
+                form.submit();
+            }
+
+
+            {#        1996-02-11#}
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+    {% load widget_tweaks %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- Header -->
+<nav class="navbar navbar-inverse ">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home:home' %}">VIIT</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class="{% block registration_active %}{% endblock %}">
+                    <a href="{% url 'home:home' %}">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+                        Student Registration
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
+                        Feedback
+                    </a>
+                </li>
+                <li class="{% block details_active %}{% endblock %}">
+                    <a href="{% url 'home:details' %}">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;
+                        All Students
+                    </a>
+                </li>
+            </ul>
+
+            {% comment %}<form class="navbar-form navbar-left" role="search" method="get" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>{% endcomment %}
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
+                        Login
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+{% block body %}
+
+{% endblock %}
+
+</body>
+</html>
