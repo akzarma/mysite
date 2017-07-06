@@ -2,13 +2,38 @@
 <html>
 {% load widget_tweaks %}
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet"
+          href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css"/>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
 <form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data" id="student_form">
     {% csrf_token %}
+    <div class="container">
+        <div class="col-md-4">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+        </div>
+        <div class="col-md-3">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+        </div>
+        <div class="col-md-3">
+            {{ form.first_name.label_tag }}
+            {{ form.first_name }}
+        </div>
+    </div>
+
     <div class="col-md-8">
         {% for field in form %}
             <div>
@@ -16,9 +41,9 @@
                 {{ field|add_class:"form-control" }}
             </div>
         {% endfor %}
-        <input type="submit" value="submit" class="btn btn-danger">
+        {#        <input type="submit" value="submit" class="btn btn-primary">#}
+        <button value="submit" class="btn btn-primary" onclick=fileSizeValidate()>Submit</button>
     </div>
-
 
 </form>
 
@@ -37,14 +62,19 @@
             form.submit();
         }
 
-
         {#        1996-02-11#}
     }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
 
+<script>
+    $(function () {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1900:2012"
+            // You can put more options here.
 
+        });
+    });
+</script>
 </html>
