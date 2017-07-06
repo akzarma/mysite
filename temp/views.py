@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
+
 from .models import Student
 from django.shortcuts import render
 from .forms import StudentForm
@@ -14,25 +17,26 @@ from .forms import StudentForm
 def home(request):
     # s = Student(name="Dweep",marks=1)
     # s.save()
-    #saves student details
+    # saves student details
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            student = form.save(commit=False)
+            student.gr_number = "temp"
+            student.jee_total = student.jee_chemistry + student.jee_maths + student.jee_physics
             print("save")
             return HttpResponseRedirect('/test/')
         else:
             print("else")
             return HttpResponse(form.errors.as_data())
     else:
-        form = StudentForm(initial={'gr_number':'555','handicapped':False})
+        context = {
+            'basic_form': StudentForm(initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120}),
+        }
+
         # print(form)
         print("3")
-        return render(request, 'index.html',
-                      {
-                          'form': form,
-                          'test':5
-                      })
+        return render(request, 'test/index.html', context)
 
 
 def action(request):
@@ -48,3 +52,70 @@ def action(request):
         return HttpResponseRedirect('/action/')
     else:
         return HttpResponse("Refresh")
+
+
+class DetailView(generic.ListView):
+    template_name = 'test/details.html'
+
+    context_object_name = 'all_students'  # optional...to override default object name object_list
+
+    def get_queryset(self):
+        return Student.objects.all()
+
+
+# ignore niche wala!!
+
+class StudentUpdate(UpdateView):
+    model = Student
+    fields = ['first_name',
+              'middle_name',
+              'last_name',
+              'DOB',
+              'admission_type',
+              'shift',
+              'caste_type',
+              'branch',
+              'gr_number',
+              'email',
+              'mobile',
+              'religion',
+              'sub_caste',
+              'handicapped',
+              'nationality',
+              'emergency_name',
+              'emergency_mobile',
+              'emergency_relation',
+              'emergency_address',
+              'father_name',
+              'father_profession',
+              'father_designation',
+              'father_mobile',
+              'father_email',
+
+              'mother_name',
+              'mother_profession',
+              'mother_designation',
+              'mother_mobile',
+              'mother_email',
+              'permanent_address',
+              'permanent_state',
+              'permanent_city',
+              'permanent_pin_code',
+              'permanent_country',
+
+              'current_address',
+              'current_state',
+              'current_city',
+              'current_pin_code',
+              'current_country',
+              'jee_physics',
+              'jee_maths',
+              'jee_chemistry',
+              'jee_total',
+              'jee_max_physics',
+              'jee_max_maths',
+              'jee_max_chemistry',
+              'doc_tenth_marksheet',
+              'doc_twelfth_marksheet',
+              'doc_jee_marksheet',
+              ]

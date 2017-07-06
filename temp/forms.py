@@ -1,18 +1,22 @@
 from django import forms
+
 from .validators import file_size_validators
 from .models import Student
 
 
 class StudentForm(forms.ModelForm):
-        # for field in iter(self.fields):
-        #     self.fields[field].widget.attrs.update({
-        #         'class': 'form-control'
-        #     })
+    # for field in iter(self.fields):
+    #     self.fields[field].widget.attrs.update({
+    #         'class': 'form-control'
+    #     })
 
     class Meta:
         model = Student
         widgets = {
             'DOB': forms.DateInput(attrs={'class': 'datepicker'}),
+            # 'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            # 'middle_name': forms.TextInput(attrs={'placeholder': 'Middle Name'}),
+            # 'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
         }
         fields = ['first_name',
                   'middle_name',
