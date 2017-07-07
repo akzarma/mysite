@@ -20,6 +20,7 @@ class Student(models.Model):
     branch = models.CharField(max_length=50)
     gr_number = models.CharField(max_length=15)
 
+
     # personal details
     email = models.EmailField(max_length=100)
     mobile = models.BigIntegerField(default="0", max_length=10)
@@ -75,6 +76,7 @@ class Student(models.Model):
     doc_tenth_marksheet = models.FileField(upload_to=user_directory_path)
     doc_twelfth_marksheet = models.FileField(upload_to=user_directory_path)
     doc_jee_marksheet = models.FileField(upload_to=user_directory_path)
+    doc_profile_pic = models.ImageField(upload_to=user_directory_path)
 
     def __str__(self):
         return self.first_name + ' ' + str(self.pk)

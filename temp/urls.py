@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^details/$', views.DetailView.as_view(), name='details'),
 
     #ye abhi baaki hai .............................krra hu abhi
-    url(r'student/(?P<pk>[0-9]+)/$', views.StudentUpdate.as_view(), name='student-update'),
+    url(r'^student/(?P<pk>[0-9]+)/$', views.StudentUpdate.as_view(), name='student-update'),
 
 ]
 

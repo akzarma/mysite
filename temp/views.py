@@ -5,7 +5,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
-from zope.interface.tests.test_interfaces import _ConformsToIObjectEvent
 
 from .models import Student
 from django.shortcuts import render
@@ -18,11 +17,13 @@ from .forms import StudentForm
 def home(request):
     # s = Student(name="Dweep",marks=1)
     # s.save()
-    #saves student details
+    # saves student details
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            student = form.save(commit=False)
+            student.gr_number = "temp"
+            student.jee_total = student.jee_chemistry + student.jee_maths + student.jee_physics
             print("save")
             return HttpResponseRedirect('/test/')
         else:
@@ -30,14 +31,12 @@ def home(request):
             return HttpResponse(form.errors.as_data())
     else:
         context = {
-            'basic_form' : StudentForm(initial={'gr_number':'555','handicapped':False}),
+            'basic_form': StudentForm(initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120}),
         }
-
 
         # print(form)
         print("3")
-        return render(request, 'test/index.html',context)
-
+        return render(request, 'test/index.html', context)
 
 
 def action(request):
@@ -55,15 +54,13 @@ def action(request):
         return HttpResponse("Refresh")
 
 
-
 class DetailView(generic.ListView):
     template_name = 'test/details.html'
 
-    context_object_name = 'all_students' #optional...to override default object name object_list
+    context_object_name = 'all_students'  # optional...to override default object name object_list
 
     def get_queryset(self):
         return Student.objects.all()
-
 
 
 # ignore niche wala!!

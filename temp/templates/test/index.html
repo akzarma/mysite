@@ -1,47 +1,356 @@
 
 
 {% extends 'test/base.html' %}
-
+{% load widget_tweaks %}
 {% block title %}VIIT{% endblock %}
 
 {% block registration_active %}active{% endblock %}
+{% block head %}
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+
+    <script>
+        function fileSizeValidate() {
+            alert("here");
+            var element = document.getElementById("id_marks");
+            var size = element.files[0].size;
+            var max_size = 1024 * 1024;
+            //alert(element.files[0].size);
+            if (size > max_size) {
+                alert("File too big!");
+                return false;
+            }
+            else {
+                return true;
+            }
+
+            {#        1996-02-11#}
+        }
+    </script>
+    <style>
+        .main-form {
+            margin-left: 30px;
+            background-color: white;
+            border-radius: 0.5%;
+            padding-top: 20px;
+        }
+
+        .form-group {
+            background-color: white;
+        }
+
+        {#        .fileUpload {#}
+        {#            position: relative;#}
+        {#            overflow: hidden;#}
+        {#            margin: 10px;#}
+        {#            height: 50px;#}
+        {#        }#}
+        {##}
+        {#        .fileUpload input.upload {#}
+        {#            position: absolute;#}
+        {#            top: 0;#}
+        {#            right: 0;#}
+        {#            margin: 0;#}
+        {#            padding: 0;#}
+        {#            font-size: 20px;#}
+        {#            cursor: pointer;#}
+        {#            opacity: 0;#}
+        {#            filter: alpha(opacity=0);#}
+        {#        }#}
+
+        .form-element {
+            margin-bottom: 7px;
+        }
+
+        .personal-details {
+            margin-left: 40px;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
 
-<form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data" id="student_form">
-    {% csrf_token %}
+    <form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data" id="student_form">
+        {% csrf_token %}
+
+        <div class="container-fluid">
+
+            <div class="main-form container form-group">
+                <div class="row">
+                    <div class="fileUpload btn btn-primary col-md-2">
+                        {{ basic_form.doc_profile_pic|add_class:"container-fliud" }}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.first_name.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.first_name }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.middle_name.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.middle_name }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.last_name.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.last_name }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.DOB.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.DOB }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.admission_type.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.admission_type }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.branch.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.branch }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.shift.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.shift }}</div>
+                        </div>
+                        <div class="row form-element">
+                            <label class="control-label col-md-4">{{ basic_form.caste_type.label_tag }}</label>
+                            <div class="col-md-8">{{ basic_form.caste_type }}</div>
+                        </div>
+                    </div>
+                    <script>
+                        $(function () {
+                            $(".datepicker").datepicker({
+                                changeMonth: true,
+                                changeYear: true
+                                // You can put more options here.
+
+                            });
+                        });
+                    </script>
+                    {#                    {% for field in basic_form %}#}
+                    {#                        <div class="form-group">#}
+                    {#                            <div class="col-sm-offset-2 col-sm-10">#}
+                    {#                                <span class="text-danger small">{{ field.errors }}</span>#}
+                    {#                            </div>#}
+                    {#                            <label class="control-label col-sm-2">{{ field.label_tag }}</label>#}
+                    {#                            <div class="col-sm-10">{{ field }}</div>#}
+                    {#                        </div>#}
+                    {#                    {% endfor %}#}
 
 
-    <div class="container-fluid">
+                </div>
+                <div class="row box">
+                    <hr>
+                    <div>
+                        <label class="col-md-5" style="background-color: lightslategray;color: black"><b>Personal
+                            Details</b></label>
+                        <div class="col-md-1"></div>
+                        <label class="col-md-6" style="background-color: lightslategray;color: black"><b>Emergency
+                            Contact</b></label>
+                    </div>
+                    <div class="personal-details ">
+                        <div class="row">
+                            <div class="col-md-4">
 
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-                        {% for field in basic_form %}
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <span class="text-danger small">{{ field.errors }}</span>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.email.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.email }}</div>
                                 </div>
-                                <label class="control-label col-sm-2">{{ field.label_tag }}</label>
-                                <div class="col-sm-10">{{ field }}</div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mobile.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mobile }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.religion.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.religion }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.sub_caste.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.sub_caste }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.nationality.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.nationality }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.handicapped.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.handicapped }}</div>
+                                </div>
                             </div>
-                        {% endfor %}
-
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.emergency_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.emergency_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.emergency_mobile.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.emergency_mobile }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.emergency_relation.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.emergency_relation }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.emergency_address.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.emergency_address }}</div>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                        <hr>
+                        <div class="row">
+                            {#                            <label>Family Details</label>#}
+                            <div class="col-md-6">
+                                <label>Father</label>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.father_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.father_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.father_email.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.father_email }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.father_profession.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.father_profession }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.father_designation.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.father_designation }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.father_mobile.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.father_mobile }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Mother</label>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mother_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mother_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mother_email.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mother_email }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mother_profession.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mother_profession }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mother_designation.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mother_designation }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.mother_mobile.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.mother_mobile }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            {#                            <label>Family Details</label>#}
+                            <div class="col-md-6">
+                                <label>Permanent Address</label>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.permanent_address.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.permanent_address }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.permanent_state.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.permanent_state }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.permanent_city.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.permanent_city }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.permanent_pin_code.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.permanent_pin_code }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.permanent_country.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.permanent_country }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Current Address</label>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.current_address.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.current_address }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.current_state.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.current_state }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.current_city.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.current_city }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.current_pin_code.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.current_pin_code }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.current_country.label_tag }}</label>
+                                    <div class="col-md-8">{{ basic_form.current_country }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_physics.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_physics }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_maths.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_maths }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_chemistry.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_chemistry }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_max_physics.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_max_physics }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_max_maths.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_max_maths }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.jee_max_chemistry.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.jee_max_chemistry }}</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.doc_jee_marksheet.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.doc_jee_marksheet }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.doc_tenth_marksheet.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.doc_tenth_marksheet }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.doc_twelfth_marksheet.label_tag }}</label>
+                                <div class="col-md-8">{{ basic_form.doc_twelfth_marksheet }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button class="btn btn-success" onsubmit=fileSizeValidate()>Submit</button>
                 </div>
             </div>
         </div>
-    </div>
 
-</form>
+
+    </form>
 
 {% endblock %}
+
+
+
