@@ -42,6 +42,9 @@ def home(request):
         return render(request, 'test/index.html', context)
 
 
+def login(request):
+    return render(request,'test/login.html')
+
 
 
 def action(request):
@@ -59,9 +62,14 @@ def action(request):
         return HttpResponse("Refresh")
 
 
-def test(request):
-    template_name = 'test/all_students.html'
-    return render(request, 'test/all_students.html', {
+def gridView(request):
+    return render(request, 'test/all_students_grid.html', {
+        'root': settings.MEDIA_ROOT,
+        'all_students': Student.objects.all()
+    })
+
+def listView(request):
+    return render(request, 'test/all_students_list.html', {
         'root': settings.MEDIA_ROOT,
         'all_students': Student.objects.all()
     })
@@ -79,7 +87,7 @@ def test(request):
 
 class StudentDelete(DeleteView):
     model = Student
-    success_url = reverse_lazy('home:all_students')
+    success_url = reverse_lazy('home:all_students_list')
 
 
 

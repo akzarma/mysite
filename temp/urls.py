@@ -12,18 +12,21 @@ urlpatterns = [
 
     url(r'^action/$', views.action, name="action"),
 
-    #all student list page /test/all
-    url(r'^all/$', views.test, name='all_students'),
+    #all student list page /test/all/grid
+    url(r'^all/grid/$', views.gridView, name='all_students_grid'),
+
+    url(r'^all/list/$', views.listView, name='all_students_list'),
+
 
     # /test/2/delete
-    url(r'album/(?P<pk>[0-9]+)/delete/$', views.StudentDelete.as_view(), name='student-delete'),
+    url(r'/(?P<pk>[0-9]+)/delete/$', views.StudentDelete.as_view(), name='student-delete'),
 
 
     # /test/19
     url(r'^(?P<student_id>[0-9]+)/$', views.DetailView, name='details'),
 
-    # # /test/status=true   or false
-    # url(r'^/status=(?P<submit_status>)/$', views.homecheck, name='check'),
+
+    url(r'^login/$', views.login, name='login'),
 
 
 

@@ -7,6 +7,12 @@
 
     /* background-color: darkred;*/
 }
+
+.login{
+    margin-top: 90px;
+    font-size: 230px;
+}
+
 .navbar-fnt {
     color: white;
 }

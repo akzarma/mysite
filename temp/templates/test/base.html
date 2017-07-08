@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="{% block details_active %}{% endblock %}">
-                        <a href="{% url 'home:all_students' %}" class="navbar-fnt"   >
+                        <a href="{% url 'home:all_students_grid' %}" class="navbar-fnt"   >
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;
                             All Students
                         </a>
@@ -80,8 +80,8 @@
                             Feedback
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#" class="navbar-fnt">
+                    <li class="{% block login_active %}{% endblock %}">
+                        <a href="{% url 'home:login' %}" class="navbar-fnt">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
                             Login
                         </a>
@@ -92,11 +92,11 @@
 
         </nav>
     </div>
-    {% block body %}
+
+</div>
+{% block body %}
 
     {% endblock %}
-</div>
-
 
 </body>
 </html>
