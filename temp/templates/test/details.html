@@ -1,67 +1,347 @@
+
+
 {% extends 'test/base.html' %}
-{% block details_active %}active{% endblock %}
+{% load widget_tweaks %}
+{% block title %}VIIT{% endblock %}
+
+
 {% block body %}
 
-<div class="albums-container container-fluid">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>Students</h3>
+    <div class="container-fluid main-form">
+
+
+        <div class="container  well well-sm">
+            <div class="row">
+                <div class="personal-details ">
+                    <div class="row">
+                        <div class="col-md-12 photoContainer">
+                            <div class="col-sm-5 col-lg-2">
+                                <div class="thumbnail">
+                                    <a href="{{ student.doc_profile_pic.url }}" target="_blank">
+                                        <img src="{{ student.doc_profile_pic.url }}" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.first_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ student.first_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.middle_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ student.middle_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.last_name.label_tag }}</label>
+                                    <div class="col-md-8">{{ student.last_name }}</div>
+                                </div>
+                                <div class="row form-element">
+                                    <label class="control-label col-md-4">{{ basic_form.DOB.label_tag }}</label>
+                                    <div class="col-md-8" id="#datepicker">{{ student.DOB }}
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.admission_type.label_tag }}</label>
+                                <div class="col-md-8">{{ student.admission_type }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.branch.label_tag }}</label>
+                                <div class="col-md-8">{{ student.branch }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.shift.label_tag }}</label>
+                                <div class="col-md-8">{{ student.shift }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.caste_type.label_tag }}</label>
+                                <div class="col-md-8">{{ student.caste_type }}</div>
+                            </div>
+                        </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
         </div>
 
 
-    {% if all_students %}
+        <div class="container  well">
+            <div class="row">
 
-        <ul>
-            {% for student in all_students %}
-                <div class="col-sm-4 col-lg-2">
-                    <div class="thumbnail">
-                         <a href="#">
-                            <img src="http://findicons.com/files/icons/1773/free/256/person.png" class="img-responsive">
-                        </a>
-                        <div class="caption">
-                            <h2>{{ student.first_name }}</h2>
-                            <h4>{{ student.gr_number }}</h4>
+                <div>
+                    <label class="col-md-5" style="background-color: lightslategray;color: black"><b>Personal
+                        Details</b></label>
+                    <div class="col-md-1"></div>
+                    <label class="col-md-6" style="background-color: lightslategray;color: black"><b>Emergency
+                        Contact</b></label>
+                </div>
+                <div class="personal-details ">
+                    <div class="row">
+                        <div class="col-md-4">
 
-                            <!-- View Details -->
-                            <a href="#" class="btn btn-primary btn-sm" role="button">View Details</a>
-
-                            <!-- Delete Album -->
-                            <form action="#" method="post" style="display: inline;">
-                                {% csrf_token %}
-                                <input type="hidden" name="student_id" value="" />
-                                <button type="submit" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
-                            </form>
-
-
-
-
-
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.email.label_tag }}</label>
+                                <div class="col-md-8">{{ student.email }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.mobile.label_tag }}</label>
+                                <div class="col-md-8">{{ student.mobile }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.religion.label_tag }}</label>
+                                <div class="col-md-8">{{ student.religion }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.sub_caste.label_tag }}</label>
+                                <div class="col-md-8">{{ student.sub_caste }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.nationality.label_tag }}</label>
+                                <div class="col-md-8">{{ student.nationality }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.handicapped.label_tag }}</label>
+                                <div class="col-md-8">{{ student.handicapped }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.emergency_name.label_tag }}</label>
+                                <div class="col-md-8">{{ student.emergency_name }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.emergency_mobile.label_tag }}</label>
+                                <div class="col-md-8">{{ student.emergency_mobile }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.emergency_relation.label_tag }}</label>
+                                <div class="col-md-8">{{ student.emergency_relation }}</div>
+                            </div>
+                            <div class="row form-element">
+                                <label class="control-label col-md-4">{{ basic_form.emergency_address.label_tag }}</label>
+                                <div class="col-md-8">{{ student.emergency_address }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                 {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
-
-            {% endfor %}
-        </ul>
-
-
-    {% else %}
-        <div class="col-sm-12">
-                <br>
-                <a href="{% url 'home:home' %}">
-                    <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Register Student
-                    </button>
-                </a>
             </div>
-    {% endif %}
+        </div>
+
+
+        <div class="container  well">
+            <div class="row">
+                {#                            <label>Family Details</label>#}
+                <label class="col-md-5" style="background-color: lightslategray;color: black"><b>Father</b></label>
+                <div class="col-md-1"></div>
+                <label class="col-md-6" style="background-color: lightslategray;color: black"><b>Mother</b></label>
+                <div class="col-md-5 personal-details">
+
+
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.father_name.label_tag }}</label>
+                        <div class="col-md-8">{{ student.father_name }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.father_email.label_tag }}</label>
+                        <div class="col-md-8">{{ student.father_email }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.father_profession.label_tag }}</label>
+                        <div class="col-md-8">{{ student.father_profession }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.father_designation.label_tag }}</label>
+                        <div class="col-md-8">{{ student.father_designation }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.father_mobile.label_tag }}</label>
+                        <div class="col-md-8">{{ student.father_mobile }}</div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.mother_name.label_tag }}</label>
+                        <div class="col-md-8">{{ student.mother_name }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.mother_email.label_tag }}</label>
+                        <div class="col-md-8">{{ student.mother_email }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.mother_profession.label_tag }}</label>
+                        <div class="col-md-8">{{ student.mother_profession }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.mother_designation.label_tag }}</label>
+                        <div class="col-md-8">{{ student.mother_designation }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.mother_mobile.label_tag }}</label>
+                        <div class="col-md-8">{{ student.mother_mobile }}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div class="container  well">
+            <div class="row">
+                {#                            <label>Family Details</label>#}
+                <label class="col-md-5" style="background-color: lightslategray;color: black"><b>Permanent
+                    Address</b></label>
+                <div class="col-md-1"></div>
+                <label class="col-md-6" style="background-color: lightslategray;color: black"><b>Current
+                    Address</b></label>
+                <div class="col-md-5 personal-details">
+
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.permanent_address.label_tag }}</label>
+                        <div class="col-md-8">{{ student.permanent_address }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.permanent_state.label_tag }}</label>
+                        <div class="col-md-8">{{ student.permanent_state }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.permanent_city.label_tag }}</label>
+                        <div class="col-md-8">{{ student.permanent_city }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.permanent_pin_code.label_tag }}</label>
+                        <div class="col-md-8">{{ student.permanent_pin_code }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.permanent_country.label_tag }}</label>
+                        <div class="col-md-8">{{ student.permanent_country }}</div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.current_address.label_tag }}</label>
+                        <div class="col-md-8">{{ student.current_address }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.current_state.label_tag }}</label>
+                        <div class="col-md-8">{{ student.current_state }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.current_city.label_tag }}</label>
+                        <div class="col-md-8">{{ student.current_city }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.current_pin_code.label_tag }}</label>
+                        <div class="col-md-8">{{ student.current_pin_code }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.current_country.label_tag }}</label>
+                        <div class="col-md-8">{{ student.current_country }}</div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+
+        <div class="container  well">
+            <div class="row">
+                <label class="col-md-5" style="background-color: lightslategray;color: black"><b>Exam
+                    Details</b></label>
+                <div class="col-md-1"></div>
+                <label class="col-md-6" style="background-color: lightslategray;color: black"><b>Upload
+                    Documents</b></label>
+
+
+                <div class="col-md-5 personal-details">
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_physics.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_physics }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_maths.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_maths }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_chemistry.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_chemistry }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_max_physics.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_max_physics }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_max_maths.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_max_maths }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_max_chemistry.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_max_chemistry }}</div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.jee_total.label_tag }}</label>
+                        <div class="col-md-8">{{ student.jee_total }}</div>
+                    </div>
+
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.gr_number.label_tag }}</label>
+                        <div class="col-md-8">{{ student.gr_number }}</div>
+                    </div>
+
+                    <div class="row form-element">
+
+
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.doc_jee_marksheet.label_tag }}</label>
+                        <div class="col-md-8"><a href="{{ student.doc_jee_marksheet.url }}" target="_blank">Click to View</a></div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.doc_tenth_marksheet.label_tag }}</label>
+                        <div class="col-md-8"><a href="{{ student.doc_tenth_marksheet.url }}" target="_blank">Click to View</a></div>
+                    </div>
+                    <div class="row form-element">
+                        <label class="control-label col-md-4">{{ basic_form.doc_twelfth_marksheet.label_tag }}</label>
+                        <div class="col-md-8"><a href="{{ student.doc_twelfth_marksheet.url }}" target="_blank">Click to View</a></div>
+                    </div>
+                </div>
+            </div>
+            
+
+
+        </div>
+
+
+        <!-- The actual snackbar -->
+        <div id="snackbar">Student data is successfully saved!</div>
+
 
     </div>
 
-</div>
+
+
+
+
+
 
 {% endblock %}
+
+
+

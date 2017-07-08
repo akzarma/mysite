@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = "home"
 
@@ -10,11 +12,22 @@ urlpatterns = [
 
     url(r'^action/$', views.action, name="action"),
 
-    #all student list page /test/details
-    url(r'^details/$', views.DetailView.as_view(), name='details'),
+    #all student list page /test/all
+    url(r'^all/$', views.test, name='all_students'),
 
-    #ye abhi baaki hai .............................krra hu abhi
-    url(r'^student/(?P<pk>[0-9]+)/$', views.StudentUpdate.as_view(), name='student-update'),
+    # /test/2/delete
+    url(r'album/(?P<pk>[0-9]+)/delete/$', views.StudentDelete.as_view(), name='student-delete'),
+
+
+    # /test/19
+    url(r'^(?P<student_id>[0-9]+)/$', views.DetailView, name='details'),
+
+    # # /test/status=true   or false
+    # url(r'^/status=(?P<submit_status>)/$', views.homecheck, name='check'),
+
+
 
 ]
+
+
 

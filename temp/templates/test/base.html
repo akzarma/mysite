@@ -12,7 +12,12 @@
         .main{
             background-color: lightgray;
         }
+
     </style>
+<script src="http://findicons.com/files/icons/1773/free/256/person.png">
+
+</script>
+
     {% block head %}
     {% endblock %}
     <meta charset="UTF-8">
@@ -22,6 +27,8 @@
         {% endblock %}
         {% load staticfiles %}
     </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:900" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css"/>
@@ -29,41 +36,37 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'mysite/style.css' %}"/>
+     <script src="{% static 'mysite/scripts.js' %}"></script>
 <body>
 <!-- Header -->
 <div class="main">
     <div class="top">
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header" >
+                <button type="button" class="navbar-toggle navbar-fnt" data-toggle="collapse" data-target="#topNavBar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{% url 'home:home' %}">VIIT</a>
+       <a class="navbar-brand" href="{% url 'home:home' %}">VIIT</a>
             </div>
 
             <!-- Items -->
-            <div class="collapse navbar-collapse" id="topNavBar">
-                <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse navbar-fnt" id="topNavBar">
+                <ul class="nav navbar-nav navbar-left">
                     <li class="{% block registration_active %}{% endblock %}">
-                        <a href="{% url 'home:home' %}">
+                        <a href="{% url 'home:home' %}" class="navbar-fnt">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
                             Student Registration
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#">
-                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
-                            Feedback
-                        </a>
-                    </li>
+
                     <li class="{% block details_active %}{% endblock %}">
-                        <a href="{% url 'home:details' %}">
+                        <a href="{% url 'home:all_students' %}" class="navbar-fnt"   >
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;
                             All Students
                         </a>
@@ -72,7 +75,13 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <li class="">
-                        <a href="#">
+                        <a href="#" class="navbar-fnt">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;
+                            Feedback
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="navbar-fnt">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
                             Login
                         </a>

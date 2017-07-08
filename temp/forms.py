@@ -10,8 +10,14 @@ class StudentForm(forms.ModelForm):
     #         'class': 'form-control'
     #     })
 
+
+    branch = forms.ChoiceField(choices=[('Comp', 'Comp'),('IT', 'IT'),('EnTC','EnTC'),('MECH','MECH'),('CIVIL','CIVIL')])
+
     class Meta:
         model = Student
+
+
+
         widgets = {
             'DOB': forms.DateInput(attrs={'class': 'datepicker'}),
             # 'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
