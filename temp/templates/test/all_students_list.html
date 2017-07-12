@@ -1,0 +1,70 @@
+{% extends 'test/base.html' %}
+{% block details_active %}active{% endblock %}
+{% block body %}
+    {% load staticfiles %}
+    <div class="container-fluid main-form">
+
+        {% if all_students %}
+            <div class="panel panel-default">
+
+                <div class="container-fluid" style="margin-left: 43%">
+                    <a href="{% url 'home:all_students_grid' %}">
+                        <button type="button" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Switch to Grid View
+                        </button>
+                    </a>
+                </div>
+
+
+                <!-- Default panel contents -->
+                <div class="panel-heading">List of Students</div>
+
+                <!-- Table -->
+                <table class="table">
+                    <th>Name</th>
+                    <th>GR No.</th>
+                    <th>DOB</th>
+                    <th> View</th>
+                    <th>Delete</th>
+                    {% for student in all_students %}
+                        <tr>
+                            <td>{{ student.first_name }} {{ student.last_name }}</td>
+                            <td>{{ student.gr_number }}</td>
+                            <td>{{ student.DOB }}</td>
+                            <td>
+                                <a href="{% url 'home:details' student.id %}" class="btn btn-primary btn-sm"
+                                   role="button">View
+                                    Details</a>
+
+                            </td>
+                            <td>
+                                <form action="{% url 'home:student-delete' student.id %}" method="post"
+                                      style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="student_id" value=""/>
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'home:home' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Register Student
+                    </button>
+                </a>
+            </div>
+            </div>
+        {% endif %}
+
+
+{% endblock %}

@@ -76,7 +76,7 @@ class Student(models.Model):
     doc_tenth_marksheet = models.FileField(upload_to=user_directory_path)
     doc_twelfth_marksheet = models.FileField(upload_to=user_directory_path)
     doc_jee_marksheet = models.FileField(upload_to=user_directory_path)
-    doc_profile_pic = models.ImageField(upload_to=user_directory_path)
+    doc_profile_pic = models.FileField()
 
     def __str__(self):
         return self.first_name + ' ' + str(self.pk)

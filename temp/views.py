@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.edit import DeleteView
 
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
@@ -15,28 +18,33 @@ from .forms import StudentForm
 
 
 def home(request):
-    # s = Student(name="Dweep",marks=1)
-    # s.save()
-    # saves student details
+
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
+        print(form.fields['doc_profile_pic'])
         if form.is_valid():
-            student = form.save(commit=False)
-            student.gr_number = "temp"
-            student.jee_total = student.jee_chemistry + student.jee_maths + student.jee_physics
+            student = form.save()
             print("save")
-            return HttpResponseRedirect('/test/')
+            context = {'submit_check': 1, 'basic_form': StudentForm(initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120})}
+            print(context.values())
         else:
             print("else")
-            return HttpResponse(form.errors.as_data())
+            context = {'submit_check': 0, }
+            print(context.values())
+
+        return render(request, 'test/index.html', context)
+
     else:
         context = {
             'basic_form': StudentForm(initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120}),
         }
 
-        # print(form)
-        print("3")
         return render(request, 'test/index.html', context)
+
+
+def login(request):
+    return render(request,'test/login.html')
+
 
 
 def action(request):
@@ -54,68 +62,36 @@ def action(request):
         return HttpResponse("Refresh")
 
 
-class DetailView(generic.ListView):
-    template_name = 'test/details.html'
+def gridView(request):
+    return render(request, 'test/all_students_grid.html', {
+        'root': settings.MEDIA_ROOT,
+        'all_students': Student.objects.all()
+    })
 
-    context_object_name = 'all_students'  # optional...to override default object name object_list
+def listView(request):
+    return render(request, 'test/all_students_list.html', {
+        'root': settings.MEDIA_ROOT,
+        'all_students': Student.objects.all()
+    })
 
-    def get_queryset(self):
-        return Student.objects.all()
 
+# class DetailView(generic.ListView):
+#     context = {
+#         'root': settings.MEDIA_ROOT,
+#         'all_students': Student.objects.all()
+#     }
+#
+#     # context_object_name = 'all_students'  # optional...to override default object name object_list
+#     def get_queryset(self):
+#         return render()
 
-# ignore niche wala!!
-
-class StudentUpdate(UpdateView):
+class StudentDelete(DeleteView):
     model = Student
-    fields = ['first_name',
-              'middle_name',
-              'last_name',
-              'DOB',
-              'admission_type',
-              'shift',
-              'caste_type',
-              'branch',
-              'gr_number',
-              'email',
-              'mobile',
-              'religion',
-              'sub_caste',
-              'handicapped',
-              'nationality',
-              'emergency_name',
-              'emergency_mobile',
-              'emergency_relation',
-              'emergency_address',
-              'father_name',
-              'father_profession',
-              'father_designation',
-              'father_mobile',
-              'father_email',
+    success_url = reverse_lazy('home:all_students_list')
 
-              'mother_name',
-              'mother_profession',
-              'mother_designation',
-              'mother_mobile',
-              'mother_email',
-              'permanent_address',
-              'permanent_state',
-              'permanent_city',
-              'permanent_pin_code',
-              'permanent_country',
 
-              'current_address',
-              'current_state',
-              'current_city',
-              'current_pin_code',
-              'current_country',
-              'jee_physics',
-              'jee_maths',
-              'jee_chemistry',
-              'jee_total',
-              'jee_max_physics',
-              'jee_max_maths',
-              'jee_max_chemistry',
-              'doc_tenth_marksheet',
-              'doc_twelfth_marksheet',
-              'doc_jee_marksheet',
-              ]
+
+def DetailView(request, student_id):
+    student = get_object_or_404(Student, pk=student_id)
+    return render(request, 'test/details.html', {'student': student, 'basic_form': StudentForm()})
+
