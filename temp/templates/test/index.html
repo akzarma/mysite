@@ -11,7 +11,7 @@
 {% block body %}
 
 
-<body onload="if({{ submit_check }}){successMsg({{ submit_check }})}">
+    <body onload="if({{ submit_check }}){successMsg({{ submit_check }})}">
 
 
     <form action="{% url 'home:home' %}" method="post" enctype="multipart/form-data" class="main-form container-fluid"
@@ -220,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+
             </div>
 
 
@@ -279,7 +279,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+
 
             </div>
 
@@ -349,7 +349,6 @@
                         </div>
                     </div>
                 </div>
-                <hr>
 
 
             </div>
@@ -379,22 +378,22 @@
     </form>
 
 
-</body>
+    </body>
 
 
 {% endblock %}
 
 
 
- <script>
-        $(function () {
-            if({{ submit_check }}){
-                successMsg();
-                print({{ submit_check }});
+<script>
+    $(function () {
+        if ({{ submit_check }}) {
+            successMsg();
+            print({{ submit_check }});
 
-            }
-            print(2);
-        });
-    </script>
+        }
+        print(2);
+    });
+</script>
 
 

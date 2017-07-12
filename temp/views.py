@@ -18,14 +18,14 @@ from .forms import StudentForm
 
 
 def home(request):
-
     if request.method == 'POST':
         form = StudentForm(request.POST, request.FILES)
         print(form.fields['doc_profile_pic'])
         if form.is_valid():
             student = form.save()
             print("save")
-            context = {'submit_check': 1, 'basic_form': StudentForm(initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120})}
+            context = {'submit_check': 1, 'basic_form': StudentForm(
+                initial={'gr_number': '55564', 'handicapped': False, 'jee_total': 120})}
             print(context.values())
         else:
             print("else")
@@ -43,8 +43,7 @@ def home(request):
 
 
 def login(request):
-    return render(request,'test/login.html')
-
+    return render(request, 'test/login.html')
 
 
 def action(request):
@@ -68,6 +67,7 @@ def gridView(request):
         'all_students': Student.objects.all()
     })
 
+
 def listView(request):
     return render(request, 'test/all_students_list.html', {
         'root': settings.MEDIA_ROOT,
@@ -90,8 +90,6 @@ class StudentDelete(DeleteView):
     success_url = reverse_lazy('home:all_students_list')
 
 
-
 def DetailView(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     return render(request, 'test/details.html', {'student': student, 'basic_form': StudentForm()})
-

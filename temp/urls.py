@@ -19,7 +19,7 @@ urlpatterns = [
 
 
     # /test/2/delete
-    url(r'/(?P<pk>[0-9]+)/delete/$', views.StudentDelete.as_view(), name='student-delete'),
+    url(r'(?P<pk>[0-9]+)/delete/$', views.StudentDelete.as_view(), name='student-delete'),
 
 
     # /test/19
