@@ -1,0 +1,68 @@
+{% extends 'test/base.html' %}
+{% block details_active %}active{% endblock %}
+{% block body %}
+    {% load staticfiles %}
+    <div class="container-fluid">
+    <div class="container-fluid main-form" style="margin-left: 43%; margin-bottom: 4%">
+        <a href="{% url 'home:all_students_list' %}">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-refresh"></span>&nbsp;Switch to List View
+            </button>
+        </a>
+
+    </div>
+
+    {% if all_students %}
+        <ul>
+            {% for student in all_students %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <a href="#">
+                            <img src="{{ student.doc_profile_pic.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ student.first_name }}</h2>
+                            <h4>{{ student.gr_number }}</h4>
+
+                            <!-- View Details -->
+                            <a href="{% url 'home:details' student.id %}" class="btn btn-primary btn-sm"
+                               role="button">View Details</a>
+
+                            <!-- Delete Album -->
+                            <form action="#" method="post"
+                                  style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value=""/>
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+
+            {% endfor %}
+        </ul>
+        </div>
+
+
+    {% else %}
+        <div class="col-sm-12">
+            <br>
+            <a href="{% url 'home:home' %}">
+                <button type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp; Register Student
+                </button>
+            </a>
+        </div>
+    {% endif %}
+
+    </div>
+
+    </div>
+
+{% endblock %}

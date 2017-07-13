@@ -31,8 +31,8 @@ def home(request):
             print("else")
             context = {'submit_check': 0, }
             print(context.values())
-
-        return render(request, 'test/index.html', context)
+            print(form.errors)
+        return HttpResponseRedirect('/test/')
 
     else:
         context = {
@@ -46,19 +46,7 @@ def login(request):
     return render(request, 'test/login.html')
 
 
-def action(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        dob_s = (request.POST.get('dob'))
-        mobile = int(request.POST.get('number'))
-        print(name + email + dob_s + str(mobile))
-        dob_d = datetime.datetime.strptime(dob_s, "%Y-%m-%d").date()
-        new_student = Student(name=name, email=email, mobile=mobile, DOB=dob_d)
-        new_student.save()
-        return HttpResponseRedirect('/action/')
-    else:
-        return HttpResponse("Refresh")
+
 
 
 def grid_view(request):
@@ -90,6 +78,13 @@ def list_view(request):
 #     success_url = reverse_lazy('home:all_students_list')
 
 
-def DetailView(request, student_id):
+def detail_view(request, student_id):
     student = get_object_or_404(Student, pk=student_id)
     return render(request, 'test/details.html', {'student': student, 'basic_form': StudentForm()})
+
+
+def update(request, student_id):
+    # return HttpResponse("Hi")
+    student = get_object_or_404(Student, pk=student_id)
+    print(student.doc_jee_marksheet.url)
+    return render(request, 'test/update.html', {'basic_form': StudentForm(instance = student)})

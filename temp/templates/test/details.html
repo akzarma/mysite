@@ -9,12 +9,16 @@
 
 
     <div class="container-fluid main-form">
-
-
+        <a href="{% url 'home:update' student.pk %}">
+            <button class="btn" style="margin-left: 50px">Update</button>
+        </a>
         <div class="container  well well-sm">
+
             <div class="row">
                 <div class="personal-details ">
+
                     <div class="row">
+
                         <div class="col-md-12 photoContainer">
                             <div class="col-sm-5 col-lg-2">
                                 <div class="thumbnail">

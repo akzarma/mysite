@@ -22,7 +22,7 @@ class Student(models.Model):
 
     # personal details
     email = models.EmailField(max_length=100)
-    mobile = models.BigIntegerField(default="0", max_length=10)
+    mobile = models.BigIntegerField(default="0")
     religion = models.CharField(max_length=20)
     sub_caste = models.CharField(max_length=30)
     handicapped = models.BooleanField(default=0)
@@ -30,7 +30,7 @@ class Student(models.Model):
 
     # emergency contact
     emergency_name = models.CharField(max_length=50)
-    emergency_mobile = models.BigIntegerField(max_length=10)
+    emergency_mobile = models.BigIntegerField()
     emergency_relation = models.CharField(max_length=50)
     emergency_address = models.CharField(max_length=100)
 
