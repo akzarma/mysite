@@ -9,14 +9,15 @@
             background-color: black;
 
         }
-        .main{
+
+        .main {
             background-color: lightgray;
         }
 
     </style>
-<script src="http://findicons.com/files/icons/1773/free/256/person.png">
+    <script src="http://findicons.com/files/icons/1773/free/256/person.png">
 
-</script>
+    </script>
 
     {% block head %}
     {% endblock %}
@@ -40,19 +41,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{% static 'mysite/style.css' %}"/>
-     <script src="{% static 'mysite/scripts.js' %}"></script>
+    <script src="{% static 'mysite/scripts.js' %}"></script>
 <body>
 <!-- Header -->
 <div class="main">
     <div class="top">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="navbar-header" >
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle navbar-fnt" data-toggle="collapse" data-target="#topNavBar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-       <a class="navbar-brand" href="{% url 'home:home' %}">VIIT</a>
+                <a class="navbar-brand" href="{% url 'home:home' %}">VIIT</a>
             </div>
 
             <!-- Items -->
@@ -66,7 +67,7 @@
                     </li>
 
                     <li class="{% block details_active %}{% endblock %}">
-                        <a href="{% url 'home:all_students_grid' %}" class="navbar-fnt"   >
+                        <a href="{% url 'home:all_students_list' %}" class="navbar-fnt">
                             <span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;
                             All Students
                         </a>
@@ -96,7 +97,7 @@
 </div>
 {% block body %}
 
-    {% endblock %}
+{% endblock %}
 
 </body>
 </html>

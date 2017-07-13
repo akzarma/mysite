@@ -3,12 +3,10 @@
     border-radius: 0;
     background: darkred;
 
-
-
     /* background-color: darkred;*/
 }
 
-.login{
+.login {
     margin-top: 90px;
     font-size: 230px;
 }
@@ -17,7 +15,7 @@
     color: white;
 }
 
-.photoContainer{
+.photoContainer {
     margin-top: 1%;
     margin-left: 2%;
 }
@@ -32,12 +30,12 @@
     font-size: 30px;
 
 }
-.navbar-toggle{
-    z-index:3;
+
+.navbar-toggle {
+    z-index: 3;
 }
 
-
-.main{
+.main {
     margin-top: 70px;
 }
 
@@ -54,7 +52,8 @@
     border-radius: 0%;
     padding-top: 20px;
 }
-.container{
+
+.container {
     background-color: floralwhite;
     border-radius: 10px;
 }

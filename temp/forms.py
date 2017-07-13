@@ -11,12 +11,11 @@ class StudentForm(forms.ModelForm):
     #     })
 
 
-    branch = forms.ChoiceField(choices=[('Comp', 'Comp'),('IT', 'IT'),('EnTC','EnTC'),('MECH','MECH'),('CIVIL','CIVIL')])
+    branch = forms.ChoiceField(
+        choices=[('Comp', 'Comp'), ('IT', 'IT'), ('EnTC', 'EnTC'), ('MECH', 'MECH'), ('CIVIL', 'CIVIL')])
 
     class Meta:
         model = Student
-
-
 
         widgets = {
             'DOB': forms.DateInput(attrs={'class': 'datepicker'}),

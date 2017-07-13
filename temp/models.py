@@ -20,7 +20,6 @@ class Student(models.Model):
     branch = models.CharField(max_length=50)
     gr_number = models.CharField(max_length=15)
 
-
     # personal details
     email = models.EmailField(max_length=100)
     mobile = models.BigIntegerField(default="0", max_length=10)
